@@ -5,6 +5,7 @@ import numpy as np
 import cv2
 from pose_detector import PoseDetector
 from insights_page import InsightsPage
+from Form import Form
 
 class Squat:
     def __init__(self, root):
@@ -95,10 +96,9 @@ class Squat:
     def show_insights(self):
         self.stop_camera_feed()
         self.root.destroy()
-        insight_window = tk.Tk() 
-        data={"User":"Gourang","Exercise":"Squat","Count":self.count,"Error":self.error}
-        InsightsPage(insight_window,data)
+        Form_window = tk.Tk() 
+        Form(Form_window,"Squat",self.count, self.error)
         self.cap.release()
-        insight_window.mainloop()
+        Form_window.mainloop()
         
 

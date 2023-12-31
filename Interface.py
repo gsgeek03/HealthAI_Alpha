@@ -3,7 +3,6 @@ import os
 from tkinter import ttk, messagebox
 from exercise_page import ExercisePage
 from insights_page import InsightsPage
-from food_page import FoodPage
 
 class HealthAIApp:
     def __init__(self, root):

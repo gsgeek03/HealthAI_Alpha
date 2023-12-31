@@ -6,6 +6,7 @@ from PIL import Image, ImageTk
 import mediapipe as mp
 from pose_detector import PoseDetector
 from insights_page import InsightsPage
+from Form import Form
 
 class BicepCurlTracker:
     def __init__(self, root):
@@ -111,10 +112,10 @@ class BicepCurlTracker:
         self.root.destroy()
     
     def show_insights(self):
-        if self.cap.isOpened():
-            self.cap.release()
+        self.stop_camera_feed()
         self.root.destroy()
-        insight_window = tk.Tk() 
-        data={"User":"Gourang","Exercise":"Bicep Curl","Count":self.count}
-        InsightsPage(insight_window,data)
-        insight_window.mainloop()
+        Form_window = tk.Tk() 
+        Form(Form_window,"Bicep Curl",self.count, self.error)
+        self.cap.release()
+        Form_window.mainloop()
+ 
