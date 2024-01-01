@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-from insights_page import InsightsPage  # Import the InsightsPage class
 from pushup_counter import PushupTracker
 from bicep_curl_tracker import BicepCurlTracker 
 from Squat import Squat
+
 class ExercisePage:
     def __init__(self, root):
         self.root = root
@@ -52,9 +52,6 @@ class ExercisePage:
         squat_window=tk.Tk()
         Squat(squat_window)
         squat_window.mainloop()
-
-    def show_insights(self, exercise_module_window):
-        InsightsPage(exercise_module_window)
 
     def exit_program(self, window=None):
         if window:

@@ -10,36 +10,34 @@ class PushupTracker:
     def __init__(self, root):
         self.root = root
         self.root.title("Pushup Tracking")
-        self.root.geometry("800x600")
-
+        self.root.geometry("1000x550")
         self.detector = PoseDetector()
         self.cap = cv2.VideoCapture(0)
         self.count = 0
         self.error = 0
         self.direction = 0
         self.form = 0
-        self.feedback = ""
+        self.feedback = "Fix Form"
 
         # Camera Frame
         self.camera_frame = ttk.Frame(self.root)
         self.camera_frame.pack(expand=True, fill="both")
 
         # Count Label
-        self.count_label = ttk.Label(self.root, text="Count: 0", font=("Arial", 18))
-        self.count_label.pack(pady=10)
+        self.count_label = ttk.Label(self.camera_frame, text="Count: 0", font=("Arial", 18))
+        self.count_label.grid(row=0, column=2, pady=5, padx=10)
 
         # Status Label
-        self.status_label = ttk.Label(self.root, text="Status: Fix Form", font=("Arial", 18))
-        self.status_label.pack(pady=10)
+        self.status_label = ttk.Label(self.camera_frame, text="Status: Fix Form", font=("Arial", 18))
+        self.status_label.grid(row=1, column=2, pady=5, padx=10)
 
-        button_frame = ttk.Frame(self.root)
-        button_frame.pack(pady=20)
+        # Exit Button
+        exit_button = ttk.Button(self.camera_frame, text="Exit", command=self.exit_program)
+        exit_button.grid(row=2, column=2, pady=5, padx=10)
 
-        exit_button = ttk.Button(button_frame, text="Exit", command=self.exit_program)
-        exit_button.pack(side="left", padx=10)
-
-        insights_button = ttk.Button(button_frame, text="Insights", command=self.show_insights)
-        insights_button.pack(side="left", padx=10)
+        # Insights Button
+        chatgpt_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
+        chatgpt_btn.grid(row=2, column=3, pady=5, padx=10)
 
         self.create_widgets()
 
@@ -55,7 +53,7 @@ class PushupTracker:
             photo = ImageTk.PhotoImage(image=Image.fromarray(frame_rgb))
             camera_label = ttk.Label(self.camera_frame, image=photo)
             camera_label.photo = photo
-            camera_label.grid(row=0, column=0)
+            camera_label.grid(row=0, column=1, rowspan=4)
 
             if results.pose_landmarks:
                 lm_list = self.detector.find_position(frame, [], results)
@@ -113,5 +111,9 @@ class PushupTracker:
         self.cap.release()
         Form_window.mainloop()
 
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = PushupTracker(root)
+    root.mainloop()
         
 

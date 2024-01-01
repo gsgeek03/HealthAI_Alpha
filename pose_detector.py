@@ -58,14 +58,12 @@ class PoseDetector:
         if draw:
             cv2.line(img, (x1, y1), (x2, y2), (255, 255, 255), 3)
             cv2.line(img, (x3, y3), (x2, y2), (255, 255, 255), 3)
-
             cv2.circle(img, (x1, y1), 5, (0, 0, 255), cv2.FILLED)
             cv2.circle(img, (x1, y1), 15, (0, 0, 255), 2)
             cv2.circle(img, (x2, y2), 5, (0, 0, 255), cv2.FILLED)
             cv2.circle(img, (x2, y2), 15, (0, 0, 255), 2)
             cv2.circle(img, (x3, y3), 5, (0, 0, 255), cv2.FILLED)
             cv2.circle(img, (x3, y3), 15, (0, 0, 255), 2)
-
             cv2.putText(img, str(int(angle)), (x2 - 50, y2 + 50),
                         cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
 

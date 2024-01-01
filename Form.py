@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from insights_page import InsightsPage
+from ChatGPT import ChatGPTPage
+from Bard import BardPage
 
 class Form:
     def __init__(self, root, exercise, count, error):
@@ -42,16 +43,36 @@ class Form:
 
         # Create buttons
         exit_button = ttk.Button(self.root, text="Exit", command=self.exit_program)
-        insights_button = ttk.Button(self.root, text="Insights", command=self.pass_data_to_insights)
+        insights_button = ttk.Button(self.root, text="ChatGPT", command=self.pass_to_chatgpt)
+        
+        bard_btn = ttk.Button(self.root, text="Gemini", command=self.pass_to_gemini)
+        bard_btn.grid(row=4, column=2, padx=10, pady=10)
 
         # Position buttons
         exit_button.grid(row=4, column=0, padx=10, pady=10)
         insights_button.grid(row=4, column=1, padx=10, pady=10)
+    
 
     def exit_program(self):
         self.root.destroy()
 
-    def pass_data_to_insights(self):
+    def pass_to_chatgpt(self):
+        height = int(self.feet_entry.get())*12 + int(self.inches_entry.get())
+        weight = int(self.weight_entry.get())
+        if height <= 0:
+            print("Error: Height cannot be this much low.")
+            exit()
+        if weight == 0:
+            print("Error: Weight cannot be this much low.")
+            exit()
+        if height > 108:
+            print("Error: Height cannot be greater than 108 inches. If you have this much height you can make world record.")
+            exit()
+        if weight > 440:
+            print("Error: Hey Buddy you can make world record if you have this much weight.")
+            exit()
+        height_in_meters = height * 0.0254
+        bmi = weight / (height_in_meters ** 2)
         data={
             'name': self.name_entry.get(),
             'age': self.age_entry.get(),
@@ -60,11 +81,51 @@ class Form:
             'inches': self.inches_entry.get(),
             'exercise': self.exercise,
             'count': self.count,
-            'error': self.error
+            'error': self.error,
+            'bmi': bmi
         }
         self.root.destroy()
         insights_window = tk.Tk() 
         # Create an instance of the InsightsPage class and pass the data
-        InsightsPage(insights_window, data)
+        ChatGPTPage(insights_window, data)
         insights_window.mainloop()
-        
+
+    def pass_to_gemini(self):
+        height = int(self.feet_entry.get())*12 + int(self.inches_entry.get())
+        weight = int(self.weight_entry.get())
+
+        if height <= 0:
+            print("Error: Height cannot be this much low.")
+            exit()
+        if weight <= 0:
+            print("Error: Weight cannot be this much low.")
+            exit()
+        if height > 108:
+            print("Error: Height cannot be greater than 108 inches. If you have this much height you can make world record.")
+            exit()
+        if weight > 440:
+            print("Error: Hey Buddy you can make world record if you have this much weight.")
+            exit()
+        height_in_meters = height * 0.0254
+        bmi = weight / (height_in_meters ** 2)
+        data={
+            'name': self.name_entry.get(),
+            'age': self.age_entry.get(),
+            'weight': self.weight_entry.get(),
+            'feet': self.feet_entry.get(),
+            'inches': self.inches_entry.get(),
+            'exercise': self.exercise,
+            'count': self.count,
+            'error': self.error,
+            'bmi': bmi
+        }
+        self.root.destroy()
+        insights_window = tk.Tk() 
+        # Create an instance of the InsightsPage class and pass the data
+        BardPage(insights_window, data)
+        insights_window.mainloop()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = Form(root, "Squat", 10, 0)
+    root.mainloop()

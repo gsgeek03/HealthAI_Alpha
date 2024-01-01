@@ -5,14 +5,13 @@ import numpy as np
 from PIL import Image, ImageTk
 import mediapipe as mp
 from pose_detector import PoseDetector
-from insights_page import InsightsPage
 from Form import Form
 
 class BicepCurlTracker:
     def __init__(self, root):
         self.root = root
         self.root.title("Bicep Curl Tracking")
-        self.root.geometry("1280x720")
+        self.root.geometry("1000x550")
         self.count = 0
         self.stage = "Fixed Form"
         self.detector = PoseDetector()
@@ -26,20 +25,19 @@ class BicepCurlTracker:
 
         # Count Label inside Camera Frame
         self.count_label = ttk.Label(self.camera_frame, text="Count: 0", font=("Arial", 18))
-        self.count_label.grid(row=0, column=0, pady=10,padx=30)
+        self.count_label.grid(row=0, column=2, pady=10,padx=10)
 
         # Status Label inside Camera Frame
         self.status_label = ttk.Label(self.camera_frame, text="Status: Fix Form", font=("Arial", 18))
-        self.status_label.grid(row=1, column=0, pady=10,padx=30)
+        self.status_label.grid(row=1, column=2, pady=10,padx=10)
 
         # Exit Button
         exit_button = ttk.Button(self.camera_frame, text="Exit", command=self.exit_program)
-        exit_button.grid(row=2, column=0, pady=20,padx=30)
+        exit_button.grid(row=2, column=2, pady=10,padx=10)
 
         # Insights Button
-        insights_button = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
-        insights_button.grid(row=3, column=0, pady=10,padx=30)
-
+        chatgpt_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
+        chatgpt_btn.grid(row=3, column=2, pady=10,padx=10)
         self.create_widgets()
 
     def create_widgets(self):
@@ -112,10 +110,14 @@ class BicepCurlTracker:
         self.root.destroy()
     
     def show_insights(self):
-        self.stop_camera_feed()
         self.root.destroy()
         Form_window = tk.Tk() 
-        Form(Form_window,"Bicep Curl",self.count, self.error)
-        self.cap.release()
+        Form(Form_window,"Bicep Curl",self.count, 0)
+        if self.cap.isOpened():
+            self.cap.release()
         Form_window.mainloop()
- 
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = BicepCurlTracker(root)
+    root.mainloop() 
