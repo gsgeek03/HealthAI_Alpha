@@ -62,7 +62,7 @@ class Form:
         if height <= 0:
             print("Error: Height cannot be this much low.")
             exit()
-        if weight == 0:
+        if weight <= 0:
             print("Error: Weight cannot be this much low.")
             exit()
         if height > 108:
@@ -121,11 +121,5 @@ class Form:
         }
         self.root.destroy()
         insights_window = tk.Tk() 
-        # Create an instance of the InsightsPage class and pass the data
         BardPage(insights_window, data)
         insights_window.mainloop()
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = Form(root, "Squat", 10, 0)
-    root.mainloop()

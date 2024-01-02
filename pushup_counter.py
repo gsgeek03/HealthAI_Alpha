@@ -10,7 +10,7 @@ class PushupTracker:
     def __init__(self, root):
         self.root = root
         self.root.title("Pushup Tracking")
-        self.root.geometry("1000x550")
+        self.root.geometry("900x500")
         self.detector = PoseDetector()
         self.cap = cv2.VideoCapture(0)
         self.count = 0
@@ -25,19 +25,19 @@ class PushupTracker:
 
         # Count Label
         self.count_label = ttk.Label(self.camera_frame, text="Count: 0", font=("Arial", 18))
-        self.count_label.grid(row=0, column=2, pady=5, padx=10)
+        self.count_label.grid(row=0, column=2,columnspan=2, pady=5, padx=10)
 
         # Status Label
         self.status_label = ttk.Label(self.camera_frame, text="Status: Fix Form", font=("Arial", 18))
-        self.status_label.grid(row=1, column=2, pady=5, padx=10)
+        self.status_label.grid(row=1, column=2,columnspan=2, pady=5, padx=10)
 
         # Exit Button
         exit_button = ttk.Button(self.camera_frame, text="Exit", command=self.exit_program)
         exit_button.grid(row=2, column=2, pady=5, padx=10)
 
         # Insights Button
-        chatgpt_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
-        chatgpt_btn.grid(row=2, column=3, pady=5, padx=10)
+        insights_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
+        insights_btn.grid(row=2, column=3, pady=5, padx=10)
 
         self.create_widgets()
 
@@ -111,9 +111,4 @@ class PushupTracker:
         self.cap.release()
         Form_window.mainloop()
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = PushupTracker(root)
-    root.mainloop()
-        
 

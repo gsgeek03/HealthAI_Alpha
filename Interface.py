@@ -8,7 +8,7 @@ class HealthAIApp:
         self.root = root
         self.root.title("HealthAI")
         self.root.geometry("600x300")
-
+        
         self.create_first_page()
 
     def create_first_page(self):
@@ -36,6 +36,7 @@ class HealthAIApp:
         # Exit Button
         exit_button = ttk.Button(self.root, text="Exit", command=lambda: self.exit_program(), style='TButton')
         exit_button.pack(pady=20)
+
 
     def show_food_page(self):
         self.root.destroy()

@@ -58,6 +58,4 @@ class ExercisePage:
             window.destroy()
         else:
             self.root.destroy()
-    def situp(self):
-        pass
 

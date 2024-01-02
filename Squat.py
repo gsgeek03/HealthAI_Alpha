@@ -37,11 +37,8 @@ class Squat:
         exit_button.grid(row=2, column=2, pady=10,padx=10)
 
         # Insights Button
-        chatgpt_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
-        chatgpt_btn.grid(row=3, column=2, pady=10,padx=10)
-
-        bard_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
-        bard_btn.grid(row=3, column=3, pady=10,padx=10)
+        insights_btn = ttk.Button(self.camera_frame, text="Insights", command=self.show_insights)
+        insights_btn.grid(row=3, column=2, pady=10,padx=10)
 
         self.create_widgets()
 
@@ -95,9 +92,5 @@ class Squat:
         Form(Form_window,"Squat",self.count, self.error)
         self.cap.release()
         Form_window.mainloop()
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = Squat(root)
-    root.mainloop()        
+      
 
